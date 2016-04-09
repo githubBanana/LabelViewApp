@@ -9,7 +9,22 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.diy.labelview.Tag;
+import com.diy.labelview.TagListView;
+import com.diy.labelview.TagView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity
+        implements TagListView.OnTagCheckedChangedListener,TagListView.OnTagClickListener {
+
+    private TagListView mTagListView;
+    private final List<Tag> mTags = new ArrayList<Tag>();
+    private final String[] titles = { "安全必备", "音乐", "父母学", "上班族必备",
+            "360手机卫士", "QQ","输入法", "微信", "最美应用", "AndevUI", "蘑菇街"
+            ,"安全必备", "音乐", "父母学", "上班族必备", "安全必备", "音乐", "父母学", "上班族必备", "安全必备", "音乐", "父母学", "上班族必备"
+            ,"安全必备", "音乐", "父母学", "上班族必备", "安全必备","安全必备", "音乐", "父母学", "上班族必备", "安全必备"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +33,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        mTagListView = (TagListView) findViewById(R.id.tagview);
+        mTagListView.setDeleteMode(true);
+        setUpData();
+        mTagListView.setTags(mTags);
+
     }
 
     @Override
@@ -33,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private void setUpData() {
+        for (int i = 0; i < titles.length; i++) {
+            Tag tag = new Tag();
+            tag.setId(i);
+            tag.setChecked(true);
+            tag.setTitle(titles[i]);
+            mTags.add(tag);
+        }
     }
 
     @Override
@@ -48,5 +71,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTagCheckedChanged(TagView tagView, Tag tag) {
+
+    }
+
+    @Override
+    public void onTagClick(TagView tagView, Tag tag) {
+
     }
 }
