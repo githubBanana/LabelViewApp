@@ -14,6 +14,7 @@ public class TagListView extends FlowLayout implements OnClickListener {
 	private boolean mIsDeleteMode;
 	private OnTagCheckedChangedListener mOnTagCheckedChangedListener;
 	private OnTagClickListener mOnTagClickListener;
+    private OnTagRemoveListener mOnTagRemoveListen;
 	private int mTagViewBackgroundResId;
 	private int mTagViewTextColorResId;
 	private final List<Tag> mTags = new ArrayList<Tag>();
@@ -154,7 +155,8 @@ public class TagListView extends FlowLayout implements OnClickListener {
 	public void removeTag(Tag tag) {
 		mTags.remove(tag);
 		removeView(getViewByTag(tag));
-	}
+        mOnTagRemoveListen.onRemoveTag(mTags);
+    }
 
 	public void setDeleteMode(boolean b) {
 		mIsDeleteMode = b;
@@ -168,6 +170,10 @@ public class TagListView extends FlowLayout implements OnClickListener {
 	public void setOnTagClickListener(OnTagClickListener onTagClickListener) {
 		mOnTagClickListener = onTagClickListener;
 	}
+
+    public void setOnTagRemoveListener(OnTagRemoveListener onTagRemoveListen) {
+        mOnTagRemoveListen = onTagRemoveListen;
+    }
 
 	public void setTagViewBackgroundRes(int res) {
 		mTagViewBackgroundResId = res;
@@ -196,5 +202,9 @@ public class TagListView extends FlowLayout implements OnClickListener {
 	public static abstract interface OnTagClickListener {
 		public abstract void onTagClick(TagView tagView, Tag tag);
 	}
+
+    public static abstract interface OnTagRemoveListener {
+        public abstract void onRemoveTag(List<Tag> mTags);
+    }
 
 }
