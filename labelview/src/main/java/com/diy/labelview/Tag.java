@@ -3,24 +3,27 @@ package com.diy.labelview;
 import java.io.Serializable;
 
 public class Tag implements Serializable {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2684657309332033242L;
-	
+
+	private int location;
 	private int backgroundResId;
-	private int id;
+	private String id;
 	private boolean isChecked;
 	private int leftDrawableResId;
 	private int rightDrawableResId;
 	private String title;
+	private boolean deleteMode = false;
 
 	public Tag() {
-		
+
 	}
 
-	public Tag(int paramInt, String paramString) {
+	public Tag(int location,String paramInt, String paramString) {
+		this.location = location;
 		this.id = paramInt;
 		this.title = paramString;
 	}
@@ -29,7 +32,17 @@ public class Tag implements Serializable {
 		return this.backgroundResId;
 	}
 
-	public int getId() {
+	public boolean isDeleteMode() {
+		return deleteMode;
+	}
+
+	public void setDeleteMode(boolean deleteMode) {
+		this.deleteMode = deleteMode;
+	}
+
+	public int getLocation() {return  this.location;}
+
+	public String getId() {
 		return this.id;
 	}
 
@@ -57,7 +70,9 @@ public class Tag implements Serializable {
 		this.isChecked = paramBoolean;
 	}
 
-	public void setId(int paramInt) {
+	public void setLocation(int location) {this.location = location;}
+
+	public void setId(String paramInt) {
 		this.id = paramInt;
 	}
 

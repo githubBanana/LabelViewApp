@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.ToggleButton;
 
 public class TagView extends ToggleButton {
-	
+
 	private boolean mCheckEnable = true;
 
 	public TagView(Context paramContext) {
@@ -25,10 +25,11 @@ public class TagView extends ToggleButton {
 	}
 
 	private void init() {
+		setBackground(null);
 		setTextOn(null);
 		setTextOff(null);
 		setText("");
-		setBackgroundResource(R.drawable.tag_bg);
+//		setBackgroundResource(R.drawable.tag_bg);
 	}
 
 	public void setCheckEnable(boolean paramBoolean) {

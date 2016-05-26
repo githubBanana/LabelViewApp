@@ -17,11 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements TagListView.OnTagCheckedChangedListener,TagListView.OnTagClickListener {
+        implements TagListView.OnTagCheckedChangedListener,TagListView.OnTagClickListener
+        ,TagListView.OnTagRemoveListener{
 
     private TagListView mTagListView;
     private final List<Tag> mTags = new ArrayList<Tag>();
-    private final String[] titles = { "安全必备", "音乐", "父母学", "上班族必备",
+    private final String[] titles = {  "1", "2", "上班族必备大哥大哥大哥大哥的发个梵蒂冈地方",
             "360手机卫士", "QQ","输入法", "微信", "最美应用", "AndevUI", "蘑菇街"
             ,"安全必备", "音乐", "父母学", "上班族必备", "安全必备", "音乐", "父母学", "上班族必备", "安全必备", "音乐", "父母学", "上班族必备"
             ,"安全必备", "音乐", "父母学", "上班族必备", "安全必备","安全必备", "音乐", "父母学", "上班族必备", "安全必备"};
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity
 
         mTagListView = (TagListView) findViewById(R.id.tagview);
         mTagListView.setDeleteMode(true);
+        mTagListView.setOnTagClickListener(this);
+        mTagListView.setOnTagRemoveListener(this);
         setUpData();
         mTagListView.setTags(mTags);
 
@@ -51,8 +54,10 @@ public class MainActivity extends AppCompatActivity
     private void setUpData() {
         for (int i = 0; i < titles.length; i++) {
             Tag tag = new Tag();
-            tag.setId(i);
-            tag.setChecked(true);
+            if (i >= 1)
+                tag.setDeleteMode(true);
+            tag.setId(""+i);
+            tag.setChecked(false);
             tag.setTitle(titles[i]);
             mTags.add(tag);
         }
@@ -80,6 +85,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onTagClick(TagView tagView, Tag tag) {
+        mTagListView.removeTag(tag);
+    }
+
+    @Override
+    public void onRemoveTag(List<Tag> mTags) {
 
     }
 }

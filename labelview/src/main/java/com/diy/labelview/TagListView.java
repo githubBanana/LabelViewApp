@@ -18,6 +18,7 @@ public class TagListView extends FlowLayout implements OnClickListener {
 	private int mTagViewBackgroundResId;
 	private int mTagViewTextColorResId;
 	private final List<Tag> mTags = new ArrayList<Tag>();
+	private int tagColor = getResources().getColor(R.color.green);
 
 	/**
 	 * @param context
@@ -71,15 +72,14 @@ public class TagListView extends FlowLayout implements OnClickListener {
 		localTagView.setTag(t);
 
 		if (mTagViewTextColorResId <= 0) {
-			int c = getResources().getColor(R.color.green);
-			localTagView.setTextColor(c);
+			localTagView.setTextColor(tagColor);
 
 		}
 
-		if (mTagViewBackgroundResId <= 0) {
+		/*if (mTagViewBackgroundResId <= 0) {
 			mTagViewBackgroundResId = R.drawable.tag_bg;
 			localTagView.setBackgroundResource(mTagViewBackgroundResId);
-		}
+		}*/
 
 		localTagView.setChecked(t.isChecked());
 		localTagView.setCheckEnable(b);
@@ -89,7 +89,8 @@ public class TagListView extends FlowLayout implements OnClickListener {
 			localTagView.setPadding(localTagView.getPaddingLeft(),
 					localTagView.getPaddingTop(), k,
 					localTagView.getPaddingBottom());
-			localTagView.setCompoundDrawablesWithIntrinsicBounds(0, 0,
+            if (t.isDeleteMode())
+			    localTagView.setCompoundDrawablesWithIntrinsicBounds(0, 0,
 					R.mipmap.forum_tag_close, 0);
 		}
 		if (t.getBackgroundResId() > 0) {
@@ -117,12 +118,16 @@ public class TagListView extends FlowLayout implements OnClickListener {
 		addView(localTagView);
 	}
 
-	public void addTag(int i, String s) {
-		addTag(i, s, false);
+	public void setTagColor(int color) {
+		tagColor = getResources().getColor(color);
 	}
 
-	public void addTag(int i, String s, boolean b) {
-		addTag(new Tag(i, s), b);
+	public void addTag(int location,String i, String s) {
+		addTag(location,i, s, false);
+	}
+
+	public void addTag(int location,String i, String s, boolean b) {
+		addTag(new Tag(location,i, s), b);
 	}
 
 	public void addTag(Tag tag) {

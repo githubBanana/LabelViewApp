@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FlowLayout extends ViewGroup {
-	
+
 	public static final int HORIZONTAL = 0;
 	public static final int VERTICAL = 1;
 	private int horizontalSpacing = 0;
@@ -20,19 +20,19 @@ public class FlowLayout extends ViewGroup {
 	public FlowLayout(Context context) {
 		super(context);
 
-		this.readStyleParameters(context, null);
+//		this.readStyleParameters(context, null);
 	}
 
 	public FlowLayout(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
 
-		this.readStyleParameters(context, attributeSet);
+//		this.readStyleParameters(context, attributeSet);
 	}
 
 	public FlowLayout(Context context, AttributeSet attributeSet, int defStyle) {
 		super(context, attributeSet, defStyle);
 
-		this.readStyleParameters(context, attributeSet);
+//		this.readStyleParameters(context, attributeSet);
 	}
 
 	@Override
@@ -216,7 +216,7 @@ public class FlowLayout extends ViewGroup {
 		return new LayoutParams(p);
 	}
 
-	private void readStyleParameters(Context context, AttributeSet attributeSet) {
+	/*private void readStyleParameters(Context context, AttributeSet attributeSet) {
 		TypedArray a = context.obtainStyledAttributes(attributeSet,
 				R.styleable.FlowLayout);
 		try {
@@ -230,7 +230,7 @@ public class FlowLayout extends ViewGroup {
 		} finally {
 			a.recycle();
 		}
-	}
+	}*/
 
 	private void drawDebugInfo(Canvas canvas, View child) {
 		if (!debugDraw) {
@@ -310,7 +310,7 @@ public class FlowLayout extends ViewGroup {
 
 		public LayoutParams(Context context, AttributeSet attributeSet) {
 			super(context, attributeSet);
-			this.readStyleParameters(context, attributeSet);
+//			this.readStyleParameters(context, attributeSet);
 		}
 
 		public LayoutParams(int width, int height) {
@@ -334,7 +334,7 @@ public class FlowLayout extends ViewGroup {
 			this.y = y;
 		}
 
-		private void readStyleParameters(Context context,
+		/*private void readStyleParameters(Context context,
 				AttributeSet attributeSet) {
 			TypedArray a = context.obtainStyledAttributes(attributeSet,
 					R.styleable.FlowLayout_LayoutParams);
@@ -353,6 +353,6 @@ public class FlowLayout extends ViewGroup {
 			} finally {
 				a.recycle();
 			}
-		}
+		}*/
 	}
 }
